@@ -1,0 +1,16 @@
+{
+  "active": "box-a",
+  "fallback": "local",
+  "_note": "DSH 全局算力清单（真身）。接新机器 = 加一条 target；改默认 = 改 active。技能与插件都不用动。",
+  "targets": {
+    "box-a": {
+      "host": "box-a", "user": "ksoulness",
+      "candidates": [{ "via": "public", "ssh": "box-a" }, { "via": "tailnet", "ssh": "tb4-ts" }],
+      "bestVia": "public",
+      "workRoot": "/srv/work", "jobsRoot": "/srv/jobs", "py": "/srv/brain/venv/bin/python",
+      "note": "4C/15G/49G，公网 203.0.113.10，2027-01-06 到期"
+    },
+    "local": { "kind": "local", "shell": "bash -lc", "note": "Windows 本机：只编排、只取回 KB 级结论" },
+    "vps": { "host": "vps", "user": "root", "port": 17222, "role": "data-source", "note": "实盘权威机，只作实时面与数据源，不承担算力" }
+  }
+}
