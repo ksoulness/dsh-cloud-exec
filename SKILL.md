@@ -37,7 +37,9 @@ metadata:
 dsh-exec which                     # 当前目标 + 走的通道 + fallback
 dsh-exec list                      # 全部目标与角色
 dsh-exec probe [目标]              # 探活（不看配置说了什么，只看 SSH 真通不通）
-dsh-exec run <目标|-> -- "<cmd>"   # 在目标上执行；- 表示当前 active
+dsh-exec run <目标> -- "<cmd>"     # 在指定目标上执行
+dsh-exec run - -- "<cmd>"          # - = **本机原地**执行（绝不偷偷跑到云主机）
+dsh-exec run active -- "<cmd>"     # active = 当前默认目标
 dsh-exec use <目标>                # 切换默认（原地改 active）
 ```
 

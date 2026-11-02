@@ -80,10 +80,12 @@ switch (verb) {
     const name = argv[1];
     const rest = argv.slice(2);
     const cmd = (rest[0] === '--' ? rest.slice(1) : rest).join(' ');
-    if (!cmd) { console.error('用法: dsh-exec run <target|-> -- <command>'); process.exit(2); }
-    run(pick(name === '-' || name === 'active' ? undefined : name), name, cmd);
+    if (!cmd) { console.error('用法: dsh-exec run <target|-> -- <command>   （- 表示本机原地，active 表示当前默认目标）'); process.exit(2); }
+    // '-' = 本机原地执行（不会偷偷跑在云主机上）；'active' 或不写 = 当前 active
+    const targetName = name === '-' ? 'local' : name === 'active' ? cfg.active : name;
+    run(pick(targetName), targetName, cmd);
     break;
   }
   default:
-    console.log('dsh-exec which|list|probe [t]|use <t>|run <t|-> -- "<cmd>"');
+    console.log('dsh-exec which|list|probe [t]|use <t>|run <t|-> -- "<cmd>"\n  run -       本机原地执行\n  run active  当前默认目标\n  run <t>     指定目标');
 }
